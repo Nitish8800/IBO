@@ -40,82 +40,56 @@ Sample Output for the given listOfProducts will be :
 */
 
 const listOfProducts = [
-    {
-      productName: "TV",
-      quantity: 10,
-      description: "television",
-    },
-    {
-      productName: "AC",
-      quantity: 5,
-      description: "air conditioner",
-    },
-    {
-      productName: "TV",
-      quantity: 10,
-      description: "television",
-    },
-    {
-      productName: "AC",
-      quantity: 5,
-      description: "air conditioner",
-    },
-    {
-      productName: "FAN",
-      quantity: 10,
-      description: "Ceiling Fan",
-    },
-  ];
-  
-  /*  --------------------  Answer 1 ----------------------- */
-  var obj = {};
-  for (var i = 0; i < listOfProducts.length; i++) {
-    // console.log(listOfProducts[i].productName)
-  
-    if (obj[listOfProducts[i].productName] == undefined) {
-      obj[listOfProducts[i].productName] = 1;
-    } else {
-      obj[listOfProducts[i].productName]++;
-    }
-  }
-  console.log(obj); //{ TV: 2, AC: 2, FAN: 1 }
-  
+  {
+    productName: "TV",
+    quantity: 10,
+    description: "television",
+  },
+  {
+    productName: "AC",
+    quantity: 5,
+    description: "air conditioner",
+  },
+  {
+    productName: "TV",
+    quantity: 10,
+    description: "television",
+  },
+  {
+    productName: "AC",
+    quantity: 5,
+    description: "air conditioner",
+  },
+  {
+    productName: "FAN",
+    quantity: 10,
+    description: "Ceiling Fan",
+  },
+];
 
+/*  --------------------  Answer 1 ----------------------- */
+var obj = {};
+for (var i = 0; i < listOfProducts.length; i++) {
+  // console.log(listOfProducts[i].productName)
 
-  /*  --------------------  Answer 2 ----------------------- */
-  var map1 = new Map();
-  listOfProducts.map((el) => {
-    map1.set(el.productName, el.description);
-  });
-  
-  // console.log(map1)
-  
-  function sumQuantity(el) {
-    var mainObj = {};
-  
-    el.forEach(function (obj) {
-      if (obj.productName in mainObj) {
-        mainObj[obj.productName] += obj.quantity;
-      } else {
-        mainObj[obj.productName] = obj.quantity;
-      }
-    });
-  
-    var arr = [];
-  
-    for (var keys in mainObj) {
-      arr.push({
-        productName: keys,
-        quantity: mainObj[keys],
-        description: map1.get(keys),
-      });
-    }
-    return arr;
+  if (obj[listOfProducts[i].productName] == undefined) {
+    obj[listOfProducts[i].productName] = 1;
+  } else {
+    obj[listOfProducts[i].productName]++;
   }
-  
-  console.log(sumQuantity(listOfProducts)); /* [
-                                          { productName: 'TV', quantity: 20, description: 'hello' },
-                                          { productName: 'AC', quantity: 10, description: 'air conditioner' },
-                                          { productName: 'FAN', quantity: 10, description: 'Ceiling Fan' }
-                                      ]
-                                      */
+}
+console.log(obj); //{ TV: 2, AC: 2, FAN: 1 }
+
+/*  --------------------  Answer 2 ----------------------- */
+
+var obj = {};
+for (var i = 0; i < listOfProducts.length; i++) {
+  if (obj[listOfProducts[i].productName] == undefined) {
+    obj[listOfProducts[i].productName] = listOfProducts[i];
+  } else {
+    obj[listOfProducts[i].productName].quantity =
+      obj[listOfProducts[i].productName].quantity + listOfProducts[i].quantity;
+  }
+}
+
+console.log(Object.values(obj));
